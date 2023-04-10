@@ -2,8 +2,6 @@ package br.com.geisson.esa;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +18,13 @@ public class ExemploResource {
 
     @GET
     @Path("/severe")
-    public void erro() {
+    public void severe() {
         LOG.log(Level.SEVERE, "Algum erro severo na aplicação");
+    }
+
+    @GET
+    @Path("/exeception")
+    public void excecao() throws Exception {
+        throw new Exception("Um erro qualquer");
     }
 }
