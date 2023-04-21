@@ -16,9 +16,6 @@ services:
   logstash:
     image: docker.io/elastic/logstash:7.16.3
     volumes:
-      - source: $HOME/pipelines
-        target: /usr/share/logstash/pipeline
-        type: bind
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - "12201:12201/udp"
@@ -51,6 +48,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
+      - logstash
 
 networks:
   elk:
