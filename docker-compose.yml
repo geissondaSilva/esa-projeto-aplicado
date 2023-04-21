@@ -19,6 +19,7 @@ services:
       - source: $HOME/pipelines
         target: /usr/share/logstash/pipeline
         type: bind
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - "12201:12201/udp"
       - "5000:5000"
