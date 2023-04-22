@@ -11,6 +11,8 @@ import java.util.LinkedList;
 public class ExemploMetricsResource {
     private final LinkedList<Long> list = new LinkedList<>();
 
+
+
     @GET
     @Path("prime/{number}")
     public String checkIfPrime(@PathParam("number") long number) {
@@ -28,6 +30,13 @@ public class ExemploMetricsResource {
         } else {
             return number + " is not prime.";
         }
+    }
+
+    @GET
+    @Path("nome/{nome}")
+    public String nome(@PathParam("nome") String nome) {
+
+        return "Seja bem vindo " + nome;
     }
 
     protected boolean testPrimeNumber(long number) {
