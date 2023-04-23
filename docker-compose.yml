@@ -42,7 +42,7 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
+      - /data/prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     networks:
@@ -54,9 +54,6 @@ services:
       - 3000:3000
     networks:
       - monitoring
-
-volumes:
-  prometheus_data:
 
 networks:
   monitoring:
