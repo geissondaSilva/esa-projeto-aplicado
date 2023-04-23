@@ -2,6 +2,7 @@ version: '3.2'
 
 services:
   elasticsearch:
+    container_name: elasticsearch
     image: docker.io/elastic/elasticsearch:7.16.3
     ports:
       - "9200:9200"
@@ -9,10 +10,13 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       discovery.type: "single-node"
+    volumes:
+      - /data/elasticsearch:/usr/share/elasticsearch/data
     networks:
       - elk
 
   logstash:
+    container_name: logstash
     image: docker.io/elastic/logstash:7.16.3
     volumes:
       - source: $HOME/pipelines
@@ -28,6 +32,7 @@ services:
       - elasticsearch
 
   kibana:
+    container_name: kibana
     image: docker.io/elastic/kibana:7.16.3
     ports:
       - "5601:5601"
@@ -50,11 +55,14 @@ services:
       - monitoring
 
   grafana:
+    container_name: grafana
     image: grafana/grafana
     ports:
       - 3000:3000
     networks:
       - monitoring
+    volumes:
+      - /data/grafana:/var/lib/grafana
 
 networks:
   monitoring:
