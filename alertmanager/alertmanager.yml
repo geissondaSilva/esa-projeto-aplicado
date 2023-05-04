@@ -1,0 +1,15 @@
+receivers:
+  - name: discord-webhook
+    webhook_configs:
+      - url: 'https://discord.com/api/webhooks/1103800581996421192/z5Oec8r1RxcTKieLByyxg6xge1lJ1BO-rkkg2slSVIlDsMOa0DcGWxJrbtrs-OY9zfBg'
+
+route:
+  group_by: ['InstanceOffline']
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 30m
+  receiver: discord-webhook
+  routes:
+    - match:
+        alertname: InstanceOffline
+      receiver: email

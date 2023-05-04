@@ -31,16 +31,6 @@ services:
     depends_on:
       - elasticsearch
 
-  kibana:
-    container_name: kibana
-    image: docker.io/elastic/kibana:7.16.3
-    ports:
-      - "5601:5601"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
-
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -63,6 +53,17 @@ services:
       - monitoring
     volumes:
       - /data/grafana:/var/lib/grafana
+
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - '9093:9093'
+    networks:
+      - monitoring
 
 networks:
   monitoring:

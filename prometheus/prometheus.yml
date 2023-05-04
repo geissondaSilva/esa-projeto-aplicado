@@ -13,3 +13,15 @@ scrape_configs:
     metrics_path: 'q/metrics'
     static_configs:
       - targets: ['192.168.3.86:8080']
+
+groups:
+  - name: app
+    rules:
+      - alert: InstanceOffline
+        expr: absent(up{job="app"} == 0)
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} is offline"
+          description: "The Node Exporter instance {{ $labels.instance }} has been offline for more than 5 minutes."
