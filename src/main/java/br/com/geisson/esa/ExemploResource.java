@@ -27,4 +27,10 @@ public class ExemploResource {
     public void excecao() throws Exception {
         throw new Exception("Um erro qualquer");
     }
+
+    @GET
+    @Path("/lenta")
+    public void demorada() throws InterruptedException {
+        Thread.sleep(5000);
+    }
 }
