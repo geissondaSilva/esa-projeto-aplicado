@@ -67,5 +67,4 @@ services:
 
 networks:
   monitoring:
-  elk:
     driver: bridge
