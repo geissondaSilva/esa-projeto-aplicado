@@ -13,7 +13,7 @@ services:
     volumes:
       - /data/elasticsearch:/usr/share/elasticsearch/data
     networks:
-      - elk
+      - monitoring
 
   logstash:
     container_name: logstash
@@ -27,7 +27,7 @@ services:
       - "5000:5000"
       - "9600:9600"
     networks:
-      - elk
+      - monitoring
     depends_on:
       - elasticsearch
 
