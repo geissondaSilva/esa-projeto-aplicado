@@ -16,10 +16,9 @@ services:
       - monitoring
 
   logstash:
-    container_name: logstash
     image: docker.io/elastic/logstash:7.16.3
     volumes:
-      - source: /data/logstash/pipeline
+      - source: /data/logstash/pipelines
         target: /usr/share/logstash/pipeline
         type: bind
     ports:
@@ -53,17 +52,6 @@ services:
       - monitoring
     volumes:
       - /data/grafana:/var/lib/grafana
-
-  alertmanager:
-    image: prom/alertmanager:v0.23.0
-    volumes:
-      - ./alertmanager:/etc/alertmanager
-    command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
-    ports:
-      - '9093:9093'
-    networks:
-      - monitoring
 
 networks:
   monitoring:
